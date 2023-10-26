@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, Req } from '@nestjs/common';
 import { ToDoService } from './todo.service';
 import { TodoDto } from 'src/dto/todo.dto';
 import { updateTodoDto } from 'src/dto/updateTodo.dto';
@@ -11,18 +11,21 @@ export class TodoController {
     constructor(private readonly todoService: ToDoService){}
 
     @Post()
-    addTodo(@Body() newTodo: TodoDto) {
-        return this.todoService.addTodo(newTodo)
+    addTodo(@Req() req, @Body() newTodo: TodoDto) {
+        const userId = req.user;
+        return this.todoService.addTodo(newTodo,userId)
     }
 
     @Put(":id")
-    updateTodo(@Body() updatedTodo: updateTodoDto, @Param("id",ParseIntPipe) id: number){
-        return this.todoService.updateTodo(id,updatedTodo)
+    updateTodo(@Req() req ,@Body() updatedTodo: updateTodoDto, @Param("id",ParseIntPipe) id: number){
+        const userId = req.user;
+        return this.todoService.updateTodo(id,updatedTodo, userId)
     }
 
     @Delete(":id")
-    deleteTodo(@Param("id",ParseIntPipe) id: number){
-        return this.todoService.removeTodo(id)
+    deleteTodo(@Req() req, @Param("id",ParseIntPipe) id: number){
+        const userId = req.user;
+        return this.todoService.removeTodo(id,userId)
     }
 
     @Delete("/soft/:id")

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ToDoEntity } from './todo.entity';
 import { Like, QueryBuilder, Repository } from 'typeorm';
@@ -12,18 +12,38 @@ export class ToDoService {
         @InjectRepository(ToDoEntity)
         private readonly todoRepository: Repository<ToDoEntity>,
     ) {}
-    addTodo(todo : TodoDto) {
+    addTodo(todo : TodoDto, userId) {
+      todo["userId"] = userId
         return this.todoRepository.save(todo);
     }
 
-    updateTodo(id: number , updatedTodo: updateTodoDto) {
-        return this.todoRepository.update(id, updatedTodo)
+    async updateTodo(id: number , updatedTodo: updateTodoDto, userId) {
+        const toDo= await this.getTodoById(id);
+        console.log(toDo[0].userId);
+        
+        if (userId === toDo[0].userId){
+          return this.todoRepository.update(id, updatedTodo)
+        }
+        else {
+          throw new ForbiddenException('You are not authorized to update this todo.');
+
+        }
+
 
     }
 
-    removeTodo(id: number) {
+   async  removeTodo(id: number, userId) {
+      const toDo= await this.getTodoById(id);
+      console.log(toDo[0].userId);
+      
+      if (userId === toDo[0].userId){
         return this.todoRepository.delete(id)
-    }
+      }
+      else {
+        throw new ForbiddenException('You are not authorized to update this todo.');
+
+      }
+      }
 
     removeSoftTodo(id : number) {
         return this.todoRepository.softDelete(id)

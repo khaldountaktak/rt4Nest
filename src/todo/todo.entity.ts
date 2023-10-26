@@ -23,4 +23,7 @@ export class ToDoEntity{
     @DeleteDateColumn()
     deletedAt: Date;
     
+    @Column()
+    userId: string;
+
 }
