@@ -13,7 +13,7 @@ export class ToDoService {
         private readonly todoRepository: Repository<ToDoEntity>,
     ) {}
     addTodo(todo : TodoDto, userId) {
-      todo["userId"] = userId
+        todo["userId"] = userId
         return this.todoRepository.save(todo);
     }
 

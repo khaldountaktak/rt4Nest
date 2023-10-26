@@ -9,6 +9,10 @@ import { AuthMiddleware } from './auth/auth.middleware';
 import { UserModule } from './user/user.module';
 import { CvModule } from './cv/cv.module';
 import { SkillModule } from './skill/skill.module';
+import { Cv } from './cv/entities/cv.entity';
+import { ToDoEntity } from './todo/todo.entity';
+import { User } from './user/entities/user.entity';
+import { Skill } from './skill/entities/skill.entity';
 
 @Module({
   imports: [CommonModule, TestModule, TypeOrmModule.forRoot({
@@ -18,7 +22,7 @@ import { SkillModule } from './skill/skill.module';
     username: 'root',
     password: 'root',
     database: 'test',
-    autoLoadEntities: true,
+    entities: [Cv, ToDoEntity, User, Skill],
     synchronize: true,
   }), TodoModule, UserModule, CvModule, SkillModule],
   controllers: [AppController],

@@ -1,7 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCvDto } from './dto/create-cv.dto';
 import { UpdateCvDto } from './dto/update-cv.dto';
+import { Cv } from './entities/cv.entity';
+import { GenericServiceImpl } from 'src/Generic/GeenericImpl.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
+
+
+
+@Injectable()
+export class CvService extends GenericServiceImpl<CreateCvDto,UpdateCvDto,Cv> {
+  constructor(
+    @InjectRepository(Cv)
+    private readonly cvRepository: Repository<Cv>,
+  ) {
+    super(cvRepository);
+  }
+}
+
+/*
 @Injectable()
 export class CvService {
   create(createCvDto: CreateCvDto) {
@@ -23,4 +41,4 @@ export class CvService {
   remove(id: number) {
     return `This action removes a #${id} cv`;
   }
-}
+}*/

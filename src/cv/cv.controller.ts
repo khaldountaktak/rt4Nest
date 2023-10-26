@@ -8,10 +8,11 @@ export class CvController {
   constructor(private readonly cvService: CvService) {}
 
   @Post()
-  create(@Body() createCvDto: CreateCvDto) {
-    return this.cvService.create(createCvDto);
+  async create(@Body() createCvDto: CreateCvDto) {
+    return this.cvService.add(createCvDto);
   }
-
+}
+/*
   @Get()
   findAll() {
     return this.cvService.findAll();
@@ -30,5 +31,5 @@ export class CvController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.cvService.remove(+id);
-  }
-}
+  }*/
+
