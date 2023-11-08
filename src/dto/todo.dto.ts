@@ -1,5 +1,5 @@
 import { IsNotEmpty, MaxLength, MinLength, IsIn } from "class-validator";
-import { customErrorMessages } from "src/common/length.error";
+import { customErrorMessages } from "../common/length.error";
 
 
 export class TodoDto {

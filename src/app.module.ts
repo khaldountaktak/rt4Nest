@@ -13,6 +13,12 @@ import { Cv } from './cv/entities/cv.entity';
 import { ToDoEntity } from './todo/todo.entity';
 import { User } from './user/entities/user.entity';
 import { Skill } from './skill/entities/skill.entity';
+import { SeedService } from './seed/seed.service';
+import { SeedController } from './seed/seed.controller';
+import { BaseService } from './base/base.service';
+import { BaseController } from './base/base.controller';
+import { BaseModule } from './base/base.module';
+import { BaseEntity, Repository } from 'typeorm';
 
 @Module({
   imports: [CommonModule, TestModule, TypeOrmModule.forRoot({
@@ -22,11 +28,11 @@ import { Skill } from './skill/entities/skill.entity';
     username: 'root',
     password: 'root',
     database: 'test',
-    entities: [Cv, ToDoEntity, User, Skill],
+    entities: [Cv, ToDoEntity, User, Skill, BaseEntity],
     synchronize: true,
-  }), TodoModule, UserModule, CvModule, SkillModule],
-  controllers: [AppController],
-  providers: [AppService],
+  }), TodoModule, UserModule, CvModule, SkillModule, BaseModule],
+  controllers: [AppController, SeedController, BaseController],
+  providers: [AppService, SeedService, BaseService, Repository, Object],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

@@ -2,15 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { CreateCvDto } from './dto/create-cv.dto';
 import { UpdateCvDto } from './dto/update-cv.dto';
 import { Cv } from './entities/cv.entity';
-import { GenericServiceImpl } from 'src/Generic/GeenericImpl.service';
+import { GenericServiceImpl } from '../Generic/GeenericImpl.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { BaseService } from '../base/base.service';
 
 
 
 
 @Injectable()
-export class CvService extends GenericServiceImpl<CreateCvDto,UpdateCvDto,Cv> {
+export class CvService extends BaseService<Cv> {
   constructor(
     @InjectRepository(Cv)
     private readonly cvRepository: Repository<Cv>,

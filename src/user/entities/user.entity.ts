@@ -1,4 +1,4 @@
-import { Cv } from "src/cv/entities/cv.entity";
+import { Cv } from "../../cv/entities/cv.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()

@@ -1,6 +1,6 @@
 import { MaxLength, MinLength } from "class-validator";
-import { StatusEnum } from "src/todo/status.enum";
-import { customErrorMessages } from "src/common/length.error";
+import { StatusEnum } from "../todo/status.enum";
+import { customErrorMessages } from "../common/length.error";
 
 
 

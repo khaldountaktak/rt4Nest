@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, Req } from '@nestjs/common';
 import { ToDoService } from './todo.service';
-import { TodoDto } from 'src/dto/todo.dto';
-import { updateTodoDto } from 'src/dto/updateTodo.dto';
+import { TodoDto } from '../dto/todo.dto';
+import { updateTodoDto } from '../dto/updateTodo.dto';
 import { pipe } from 'rxjs';
 import { StatusEnum } from './status.enum';
 import { stat } from 'fs';
