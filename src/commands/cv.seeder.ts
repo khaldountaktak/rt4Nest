@@ -9,14 +9,17 @@ async function bootstrap() {
     const cvService = app.get(CvService);
     
     const user = {
-        id :"5",
-        lastName: randLastName(),
-        firstName: randFirstName(),
-        age: randNumber({ min: 18, max: 100 }),
-        cin: randNumber({ length: 8 }),
+
+        lastname: randLastName(),
+        firstname: randFirstName(),
+        age: randNumber({min: 18, max: 99}),
+        cin: 10000000 + randNumber({min:0, max:9999999}),
         job: randJobTitle(),
         path: randDirectoryPath()
     };
+    console.log(user);
+    console.log(randNumber());
+    
   
     // Wait for the create operation to complete before closing the app context.
     await cvService.create(user);
